@@ -171,7 +171,7 @@ function CodeBlock({
           type="button"
           onClick={copy}
           aria-label={copied ? 'Código copiado' : 'Copiar código'}
-          className="flex h-7 items-center gap-1.5 rounded-[6px] px-2 text-[12px] text-[var(--kazer-text-3)] transition-colors hover:bg-[var(--kazer-elevated)] hover:text-[var(--kazer-text-2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]"
+          className="flex h-8 items-center gap-1.5 rounded-[6px] px-2 text-[12px] text-[var(--kazer-text-3)] transition-colors hover:bg-[var(--kazer-elevated)] hover:text-[var(--kazer-text-2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]"
         >
           {copied ? (
             <Check size={13} className="text-[var(--kazer-green)]" />

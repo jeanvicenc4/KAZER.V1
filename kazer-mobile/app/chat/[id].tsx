@@ -175,6 +175,7 @@ export default function ChatScreen() {
       >
         <Pressable
           onPress={() => router.back()}
+          hitSlop={6}
           accessibilityRole="button"
           accessibilityLabel="Voltar"
           style={{ width: 32, height: 32, alignItems: 'center', justifyContent: 'center' }}
@@ -191,6 +192,7 @@ export default function ChatScreen() {
 
         <Pressable
           onPress={() => setShowSources(true)}
+          hitSlop={7}
           accessibilityRole="button"
           accessibilityLabel="Ver fontes"
           style={{
@@ -295,6 +297,7 @@ export default function ChatScreen() {
                   {message.followUps.map((suggestion) => (
                     <Pressable
                       key={suggestion}
+                      hitSlop={4}
                       onPress={() => void send(suggestion)}
                       accessibilityRole="button"
                       style={{

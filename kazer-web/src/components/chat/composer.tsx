@@ -143,7 +143,7 @@ export function Composer({
                   aria-selected={isActive}
                   onClick={() => onModeChange(m.id)}
                   className={cn(
-                    'relative flex h-7 items-center gap-1.5 rounded-[6px] px-2.5 text-[13px] transition-colors duration-150',
+                    'relative flex h-8 items-center gap-1.5 rounded-[6px] px-2.5 text-[13px] transition-colors duration-150',
                     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]',
                     isActive
                       ? 'text-[var(--kazer-text)]'

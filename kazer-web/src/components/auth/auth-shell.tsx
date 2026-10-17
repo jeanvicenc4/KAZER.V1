@@ -15,15 +15,6 @@ export function AuthShell({
     <div className="grid min-h-dvh lg:grid-cols-[1fr_1fr]">
       {/* Brand column */}
       <div className="relative hidden flex-col justify-between overflow-hidden border-r border-[var(--kazer-line)] bg-[var(--kazer-void)] p-10 lg:flex">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-20 top-1/4 h-[420px] w-[420px] rounded-full opacity-[0.10]"
-          style={{
-            background:
-              'radial-gradient(circle, oklch(0.82 0.135 82), transparent 68%)',
-          }}
-        />
-
         <Link
           href="/"
           aria-label="KAZER — início"

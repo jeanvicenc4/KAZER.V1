@@ -272,7 +272,7 @@ function SidebarItem({
         aria-label={`Ações para ${conversation.title}`}
         aria-expanded={menuOpen}
         className={cn(
-          'absolute right-1 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-[6px] text-[var(--kazer-text-3)] transition-all',
+          'absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-[6px] text-[var(--kazer-text-3)] transition-all',
           'hover:bg-[var(--kazer-overlay)] hover:text-[var(--kazer-text-2)]',
           'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]',
           menuOpen || 'opacity-0 group-hover:opacity-100',

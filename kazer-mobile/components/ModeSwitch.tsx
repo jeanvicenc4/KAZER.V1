@@ -42,6 +42,7 @@ export function ModeSwitch({
         accessibilityRole="button"
         accessibilityLabel={`Modo: ${meta.label}. Toque para trocar`}
         accessibilityState={{ disabled: Boolean(disabled), expanded: open }}
+        hitSlop={4}
         disabled={disabled}
         onPress={() => {
           tapFeedback();

@@ -73,6 +73,7 @@ export default function ResearchScreen() {
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
           <Pressable
             onPress={() => router.back()}
+            hitSlop={6}
             accessibilityRole="button"
             accessibilityLabel="Voltar"
             style={{ width: 32, height: 32, justifyContent: 'center' }}

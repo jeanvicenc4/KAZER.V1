@@ -104,7 +104,7 @@ export function Chip({
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ selected, disabled: isDisabled }}
       onPress={onPress}
-      hitSlop={4}
+      hitSlop={6}
       style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1, ...style })}
     >
       {content}

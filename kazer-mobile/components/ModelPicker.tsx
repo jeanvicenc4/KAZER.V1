@@ -45,6 +45,7 @@ export function ModelPicker({
         accessibilityRole="button"
         accessibilityLabel={`Modelo: ${selected?.name ?? model}. Toque para trocar`}
         accessibilityState={{ disabled: Boolean(disabled), expanded: open }}
+        hitSlop={4}
         disabled={disabled}
         onPress={() => {
           tapFeedback();

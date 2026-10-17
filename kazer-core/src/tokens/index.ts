@@ -32,7 +32,7 @@ export const lines = {
 export const text = {
   primary: 'oklch(0.96 0.008 85)',
   secondary: 'oklch(0.72 0.012 280)',
-  tertiary: 'oklch(0.55 0.014 285)',
+  tertiary: 'oklch(0.65 0.014 285)',
   inverse: 'oklch(0.14 0.012 285)',
 } as const;
 

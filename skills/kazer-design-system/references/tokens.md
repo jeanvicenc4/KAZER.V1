@@ -32,7 +32,7 @@ deste arquivo. **Nunca invente um valor fora daqui.**
 |---|---|---|
 | `--kazer-text` | `oklch(0.96 0.008 85)` | texto primário (branco quente) |
 | `--kazer-text-2` | `oklch(0.72 0.012 280)` | secundário, metadados |
-| `--kazer-text-3` | `oklch(0.55 0.014 285)` | terciário, placeholders, timestamps |
+| `--kazer-text-3` | `oklch(0.65 0.014 285)` | terciário, placeholders, timestamps; contraste AA no tema escuro |
 | `--kazer-text-inverse` | `oklch(0.14 0.012 285)` | texto sobre superfície dourada/violeta |
 
 ### Acentos

@@ -217,7 +217,7 @@ function MessageAction({
       title={label}
       onClick={onClick}
       className={cn(
-        'flex h-7 w-7 items-center justify-center rounded-[6px] transition-colors',
+        'flex h-8 w-8 items-center justify-center rounded-[6px] transition-colors',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]',
         active
           ? 'bg-[var(--kazer-green-wash)] text-[var(--kazer-green)]'

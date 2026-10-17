@@ -18,7 +18,7 @@
 
     --kazer-text: oklch(0.96 0.008 85);
     --kazer-text-2: oklch(0.72 0.012 280);
-    --kazer-text-3: oklch(0.55 0.014 285);
+    --kazer-text-3: oklch(0.65 0.014 285);
     --kazer-text-inverse: oklch(0.14 0.012 285);
 
     --kazer-gold: oklch(0.82 0.135 82);
@@ -43,11 +43,32 @@
     --kazer-elevated: oklch(0.975 0.004 85);
     --kazer-overlay: oklch(0.94 0.005 85);
     --kazer-inset: oklch(0.955 0.004 85);
+
+    --kazer-line: oklch(0.2 0.015 285 / 10%);
+    --kazer-line-strong: oklch(0.2 0.015 285 / 18%);
+    --kazer-line-active: oklch(0.2 0.015 285 / 30%);
+    --kazer-line-gold: oklch(0.58 0.115 70 / 38%);
+
     --kazer-text: oklch(0.22 0.02 285);
     --kazer-text-2: oklch(0.42 0.018 283);
     --kazer-text-3: oklch(0.55 0.015 285);
+    --kazer-text-inverse: oklch(0.99 0.002 85);
+
     --kazer-gold: oklch(0.58 0.115 70);
+    --kazer-gold-soft: oklch(0.5 0.095 68);
+    --kazer-gold-dim: oklch(0.55 0.075 75);
+    --kazer-gold-wash: oklch(0.58 0.115 70 / 10%);
+    --kazer-gold-text: oklch(0.5 0.095 68);
+
     --kazer-violet: oklch(0.48 0.185 295);
+    --kazer-violet-soft: oklch(0.42 0.16 293);
+    --kazer-violet-wash: oklch(0.48 0.185 295 / 10%);
     --kazer-cyan: oklch(0.52 0.115 205);
+    --kazer-cyan-wash: oklch(0.52 0.115 205 / 10%);
+    --kazer-green: oklch(0.55 0.13 155);
+    --kazer-green-wash: oklch(0.55 0.13 155 / 10%);
+    --kazer-red: oklch(0.52 0.19 25);
+    --kazer-red-wash: oklch(0.52 0.19 25 / 10%);
+    --kazer-amber: oklch(0.6 0.13 65);
   }
 }

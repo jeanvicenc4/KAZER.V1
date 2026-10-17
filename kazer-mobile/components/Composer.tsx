@@ -165,6 +165,7 @@ export function Composer({
               accessibilityRole="button"
               accessibilityLabel={streaming ? 'Parar resposta' : 'Enviar'}
               accessibilityState={{ disabled: !streaming && !canSend }}
+              hitSlop={4}
               onPress={() => {
                 if (streaming) {
                   onStop?.();

@@ -57,7 +57,7 @@ raciocínio do agente, **ciano** para execução ao vivo.
 - **Dourado:** `oklch(0.82 0.135 82)` com gradiente metálico restrito ao logo e
   a superfícies de destaque — nunca em texto corrido de fundo escuro.
 - **Texto:** primário `oklch(0.96 0.008 85)`, secundário `oklch(0.72 0.012 280)`,
-  terciário `oklch(0.55 0.014 285)`.
+  terciário `oklch(0.65 0.014 285)` no tema escuro para manter contraste AA.
 - **Tipografia:** Geist (UI) / Geist Mono (código e saída de tool). Escala 12/13/14/15/17/20/28/40/64.
 - **Raios:** 6 (chip) · 10 (input) · 14 (card) · 20 (painel) · 999 (pill).
 - **Linha de leitura:** máx. 76 caracteres no texto de resposta.

@@ -78,7 +78,7 @@ export const oklchToHex: readonly OklchMapping[] = [
   // Text
   { token: 'text', oklch: 'oklch(0.96 0.008 85)', dark: '#f4f1ec', light: '#191924' },
   { token: 'text-2', oklch: 'oklch(0.72 0.012 280)', dark: '#a3a4ac', light: '#4b4c57' },
-  { token: 'text-3', oklch: 'oklch(0.55 0.014 285)', dark: '#70717a', light: '#70707a' },
+  { token: 'text-3', oklch: 'oklch(0.65 0.014 285)', dark: '#8e8e98', light: '#70707a' },
   { token: 'text-inverse', oklch: 'oklch(0.14 0.012 285)', dark: '#09080e', light: '#ffffff' },
 
   // Accents — gold is the brand, violet is reasoning, cyan is live action.

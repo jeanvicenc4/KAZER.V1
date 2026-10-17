@@ -83,6 +83,7 @@ export default function HomeScreen() {
           />
           <Pressable
             onPress={submit}
+            hitSlop={6}
             disabled={!query.trim()}
             accessibilityRole="button"
             accessibilityLabel="Enviar"
@@ -112,6 +113,7 @@ export default function HomeScreen() {
           {MISSIONS.map((mission) => (
             <Pressable
               key={mission.label}
+              hitSlop={6}
               onPress={() =>
                 router.push({
                   pathname: '/chat/[id]',

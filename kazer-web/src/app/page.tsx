@@ -92,15 +92,6 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden px-5 pb-20 pt-16 sm:pt-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[900px] -translate-x-1/2 opacity-[0.14]"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 50% at 50% 0%, oklch(0.82 0.135 82), transparent 70%)',
-          }}
-        />
-
         <div className="relative mx-auto max-w-[1200px]">
           <div className="mx-auto max-w-[720px] text-center">
             <h1 className="text-[40px] font-medium leading-[46px] tracking-[-0.025em] text-[var(--kazer-text)] sm:text-[56px] sm:leading-[62px]">

@@ -100,6 +100,7 @@ export function Button({
       accessibilityLabel={label}
       accessibilityState={{ disabled: isDisabled, busy: loading }}
       disabled={isDisabled}
+      hitSlop={4}
       onPressIn={(event) => {
         pressed.value = withTiming(1, { duration: 120 });
         onPressIn?.(event);

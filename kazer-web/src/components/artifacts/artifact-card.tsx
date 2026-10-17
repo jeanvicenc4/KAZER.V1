@@ -126,7 +126,7 @@ export function ArtifactCard({
           <button
             type="button"
             onClick={() => onUnlock(artifact)}
-            className="ml-auto flex h-7 items-center gap-1.5 rounded-[6px] border border-[var(--kazer-line-gold)] bg-[var(--kazer-gold-wash)] px-2 text-[12px] text-[var(--kazer-gold-text)] transition-colors hover:bg-[color-mix(in_oklch,var(--kazer-gold)_20%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]"
+            className="ml-auto flex h-8 items-center gap-1.5 rounded-[6px] border border-[var(--kazer-line-gold)] bg-[var(--kazer-gold-wash)] px-2 text-[12px] text-[var(--kazer-gold-text)] transition-colors hover:bg-[color-mix(in_oklch,var(--kazer-gold)_20%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]"
           >
             <Lock size={11} />
             Desbloquear
@@ -134,12 +134,6 @@ export function ArtifactCard({
         ) : null}
       </div>
 
-      {artifact.locked ? (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,oklch(0.82_0.135_82/8%),transparent_70%)]"
-        />
-      ) : null}
     </motion.article>
   );
 }
@@ -159,7 +153,7 @@ function ArtifactAction({
       aria-label={label}
       title={label}
       onClick={onClick}
-      className="flex h-7 w-7 items-center justify-center rounded-[6px] text-[var(--kazer-text-3)] transition-colors hover:bg-[var(--kazer-elevated)] hover:text-[var(--kazer-text-2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]"
+      className="flex h-8 w-8 items-center justify-center rounded-[6px] text-[var(--kazer-text-3)] transition-colors hover:bg-[var(--kazer-elevated)] hover:text-[var(--kazer-text-2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)]"
     >
       <Icon size={13} />
     </button>
@@ -211,7 +205,7 @@ export function ArtifactRow({
         type="button"
         onClick={onDownload}
         aria-label={`Baixar ${artifact.name}`}
-        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[6px] text-[var(--kazer-text-3)] opacity-0 transition-opacity hover:bg-[var(--kazer-overlay)] hover:text-[var(--kazer-text-2)] focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)] group-hover:opacity-100"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] text-[var(--kazer-text-3)] opacity-0 transition-opacity hover:bg-[var(--kazer-overlay)] hover:text-[var(--kazer-text-2)] focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--kazer-gold)] group-hover:opacity-100"
       >
         <Download size={13} />
       </button>
