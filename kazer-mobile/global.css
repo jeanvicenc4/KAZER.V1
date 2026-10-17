@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --kazer-void: oklch(0.115 0.01 285);
+    --kazer-base: oklch(0.145 0.012 285);
+    --kazer-surface: oklch(0.185 0.014 283);
+    --kazer-elevated: oklch(0.225 0.016 280);
+    --kazer-overlay: oklch(0.265 0.018 278);
+    --kazer-inset: oklch(0.165 0.013 284);
+
+    --kazer-line: oklch(1 0 0 / 8%);
+    --kazer-line-strong: oklch(1 0 0 / 14%);
+    --kazer-line-active: oklch(1 0 0 / 22%);
+    --kazer-line-gold: oklch(0.82 0.135 82 / 38%);
+
+    --kazer-text: oklch(0.96 0.008 85);
+    --kazer-text-2: oklch(0.72 0.012 280);
+    --kazer-text-3: oklch(0.55 0.014 285);
+    --kazer-text-inverse: oklch(0.14 0.012 285);
+
+    --kazer-gold: oklch(0.82 0.135 82);
+    --kazer-gold-soft: oklch(0.72 0.11 80);
+    --kazer-gold-wash: oklch(0.82 0.135 82 / 12%);
+    --kazer-gold-text: oklch(0.86 0.14 88);
+    --kazer-violet: oklch(0.62 0.19 295);
+    --kazer-violet-wash: oklch(0.62 0.19 295 / 14%);
+    --kazer-cyan: oklch(0.78 0.13 205);
+    --kazer-cyan-wash: oklch(0.78 0.13 205 / 13%);
+    --kazer-green: oklch(0.75 0.14 155);
+    --kazer-green-wash: oklch(0.75 0.14 155 / 13%);
+    --kazer-red: oklch(0.65 0.19 25);
+    --kazer-red-wash: oklch(0.65 0.19 25 / 14%);
+    --kazer-amber: oklch(0.8 0.15 75);
+  }
+
+  [data-theme='light'] {
+    --kazer-void: oklch(0.96 0.004 85);
+    --kazer-base: oklch(0.985 0.003 85);
+    --kazer-surface: oklch(1 0 0);
+    --kazer-elevated: oklch(0.975 0.004 85);
+    --kazer-overlay: oklch(0.94 0.005 85);
+    --kazer-inset: oklch(0.955 0.004 85);
+    --kazer-text: oklch(0.22 0.02 285);
+    --kazer-text-2: oklch(0.42 0.018 283);
+    --kazer-text-3: oklch(0.55 0.015 285);
+    --kazer-gold: oklch(0.58 0.115 70);
+    --kazer-violet: oklch(0.48 0.185 295);
+    --kazer-cyan: oklch(0.52 0.115 205);
+  }
+}

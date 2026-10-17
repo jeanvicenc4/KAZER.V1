@@ -1,0 +1,55 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './app/**/*.{js,jsx,ts,tsx}',
+    './src/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}',
+  ],
+  presets: [require('nativewind/preset')],
+  // `setColorScheme` from nativewind requires the class strategy.
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        void: 'oklch(0.115 0.01 285)',
+        base: 'oklch(0.145 0.012 285)',
+        surface: 'oklch(0.185 0.014 283)',
+        elevated: 'oklch(0.225 0.016 280)',
+        overlay: 'oklch(0.265 0.018 278)',
+        inset: 'oklch(0.165 0.013 284)',
+        line: 'oklch(1 0 0 / 8%)',
+        'line-strong': 'oklch(1 0 0 / 14%)',
+        'line-active': 'oklch(1 0 0 / 22%)',
+        ink: 'oklch(0.96 0.008 85)',
+        'ink-2': 'oklch(0.72 0.012 280)',
+        'ink-3': 'oklch(0.55 0.014 285)',
+        gold: 'oklch(0.82 0.135 82)',
+        'gold-soft': 'oklch(0.72 0.11 80)',
+        'gold-wash': 'oklch(0.82 0.135 82 / 12%)',
+        'gold-text': 'oklch(0.86 0.14 88)',
+        violet: 'oklch(0.62 0.19 295)',
+        'violet-wash': 'oklch(0.62 0.19 295 / 14%)',
+        cyan: 'oklch(0.78 0.13 205)',
+        'cyan-wash': 'oklch(0.78 0.13 205 / 13%)',
+        green: 'oklch(0.75 0.14 155)',
+        'green-wash': 'oklch(0.75 0.14 155 / 13%)',
+        red: 'oklch(0.65 0.19 25)',
+        'red-wash': 'oklch(0.65 0.19 25 / 14%)',
+        amber: 'oklch(0.8 0.15 75)',
+      },
+      borderRadius: {
+        xs: 4,
+        sm: 6,
+        md: 10,
+        lg: 14,
+        xl: 20,
+        full: 999,
+      },
+      fontFamily: {
+        sans: ['Geist', 'Inter', 'System'],
+        mono: ['Geist Mono', 'JetBrains Mono', 'Menlo', 'monospace'],
+      },
+    },
+  },
+  plugins: [],
+};

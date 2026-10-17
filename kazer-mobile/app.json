@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "KAZER",
+    "slug": "kazer",
+    "scheme": "kazer",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a10"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.kazer.mobile",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "O KAZER precisa de acesso às fotos para você anexar imagens às missões.",
+        "NSCameraUsageDescription": "O KAZER usa a câmera para capturar imagens para análise.",
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      }
+    },
+    "android": {
+      "package": "app.kazer.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#0a0a10"
+      },
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "POST_NOTIFICATIONS",
+        "VIBRATE"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "color": "#d4a03c"
+        }
+      ],
+      "expo-asset",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

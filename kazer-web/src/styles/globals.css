@@ -1,0 +1,345 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   KAZER — design tokens
+   Source: skills/kazer-design-system/references/tokens.md
+   ========================================================================== */
+
+@theme {
+  /* Surfaces — very dark blue-violet */
+  --color-void: oklch(0.115 0.01 285);
+  --color-base: oklch(0.145 0.012 285);
+  --color-surface: oklch(0.185 0.014 283);
+  --color-elevated: oklch(0.225 0.016 280);
+  --color-overlay: oklch(0.265 0.018 278);
+  --color-inset: oklch(0.165 0.013 284);
+
+  /* Lines */
+  --color-line: oklch(1 0 0 / 8%);
+  --color-line-strong: oklch(1 0 0 / 14%);
+  --color-line-active: oklch(1 0 0 / 22%);
+  --color-line-gold: oklch(0.82 0.135 82 / 38%);
+
+  /* Text */
+  --color-ink: oklch(0.96 0.008 85);
+  --color-ink-2: oklch(0.72 0.012 280);
+  --color-ink-3: oklch(0.55 0.014 285);
+
+  /* Accents */
+  --color-gold: oklch(0.82 0.135 82);
+  --color-gold-soft: oklch(0.72 0.11 80);
+  --color-gold-dim: oklch(0.55 0.075 75);
+  --color-gold-wash: oklch(0.82 0.135 82 / 12%);
+  --color-gold-text: oklch(0.86 0.14 88);
+  --color-violet: oklch(0.62 0.19 295);
+  --color-violet-soft: oklch(0.7 0.15 292);
+  --color-violet-wash: oklch(0.62 0.19 295 / 14%);
+  --color-cyan: oklch(0.78 0.13 205);
+  --color-cyan-wash: oklch(0.78 0.13 205 / 13%);
+  --color-green: oklch(0.75 0.14 155);
+  --color-green-wash: oklch(0.75 0.14 155 / 13%);
+  --color-red: oklch(0.65 0.19 25);
+  --color-red-wash: oklch(0.65 0.19 25 / 14%);
+  --color-amber: oklch(0.8 0.15 75);
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Fonts */
+  --font-sans:
+    Geist, 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:
+    'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-base: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Layout */
+  --spacing-sidebar: 264px;
+  --spacing-panel: 340px;
+  --spacing-reading: 720px;
+}
+
+:root {
+  --kazer-void: oklch(0.115 0.01 285);
+  --kazer-base: oklch(0.145 0.012 285);
+  --kazer-surface: oklch(0.185 0.014 283);
+  --kazer-elevated: oklch(0.225 0.016 280);
+  --kazer-overlay: oklch(0.265 0.018 278);
+  --kazer-inset: oklch(0.165 0.013 284);
+
+  --kazer-line: oklch(1 0 0 / 8%);
+  --kazer-line-strong: oklch(1 0 0 / 14%);
+  --kazer-line-active: oklch(1 0 0 / 22%);
+  --kazer-line-gold: oklch(0.82 0.135 82 / 38%);
+
+  --kazer-text: oklch(0.96 0.008 85);
+  --kazer-text-2: oklch(0.72 0.012 280);
+  --kazer-text-3: oklch(0.55 0.014 285);
+  --kazer-text-inverse: oklch(0.14 0.012 285);
+
+  --kazer-gold: oklch(0.82 0.135 82);
+  --kazer-gold-soft: oklch(0.72 0.11 80);
+  --kazer-gold-dim: oklch(0.55 0.075 75);
+  --kazer-gold-wash: oklch(0.82 0.135 82 / 12%);
+  --kazer-gold-text: oklch(0.86 0.14 88);
+
+  --kazer-violet: oklch(0.62 0.19 295);
+  --kazer-violet-soft: oklch(0.7 0.15 292);
+  --kazer-violet-wash: oklch(0.62 0.19 295 / 14%);
+
+  --kazer-cyan: oklch(0.78 0.13 205);
+  --kazer-cyan-wash: oklch(0.78 0.13 205 / 13%);
+  --kazer-green: oklch(0.75 0.14 155);
+  --kazer-green-wash: oklch(0.75 0.14 155 / 13%);
+  --kazer-red: oklch(0.65 0.19 25);
+  --kazer-red-wash: oklch(0.65 0.19 25 / 14%);
+  --kazer-amber: oklch(0.8 0.15 75);
+
+  --kazer-metal: linear-gradient(
+    145deg,
+    oklch(0.88 0.14 88) 0%,
+    oklch(0.78 0.135 82) 32%,
+    oklch(0.62 0.105 72) 58%,
+    oklch(0.86 0.13 90) 100%
+  );
+
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 30%);
+  --shadow-md: 0 4px 16px -4px oklch(0 0 0 / 45%);
+  --shadow-lg: 0 16px 48px -12px oklch(0 0 0 / 60%);
+  --shadow-gold:
+    0 0 0 1px oklch(0.82 0.135 82 / 30%),
+    0 8px 32px -8px oklch(0.82 0.135 82 / 22%);
+
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --dur-slower: 480ms;
+}
+
+[data-theme='light'] {
+  --kazer-void: oklch(0.96 0.004 85);
+  --kazer-base: oklch(0.985 0.003 85);
+  --kazer-surface: oklch(1 0 0);
+  --kazer-elevated: oklch(0.975 0.004 85);
+  --kazer-overlay: oklch(0.94 0.005 85);
+  --kazer-inset: oklch(0.955 0.004 85);
+
+  --kazer-line: oklch(0.2 0.015 285 / 10%);
+  --kazer-line-strong: oklch(0.2 0.015 285 / 18%);
+  --kazer-line-active: oklch(0.2 0.015 285 / 30%);
+  --kazer-line-gold: oklch(0.58 0.115 70 / 38%);
+
+  --kazer-text: oklch(0.22 0.02 285);
+  --kazer-text-2: oklch(0.42 0.018 283);
+  --kazer-text-3: oklch(0.55 0.015 285);
+  --kazer-text-inverse: oklch(0.99 0.002 85);
+
+  --kazer-gold: oklch(0.58 0.115 70);
+  --kazer-gold-soft: oklch(0.5 0.095 68);
+  --kazer-gold-dim: oklch(0.55 0.075 75);
+  --kazer-gold-wash: oklch(0.58 0.115 7 / 10%);
+  --kazer-gold-text: oklch(0.5 0.095 68);
+
+  --kazer-violet: oklch(0.48 0.185 295);
+  --kazer-violet-soft: oklch(0.42 0.16 293);
+  --kazer-violet-wash: oklch(0.48 0.185 295 / 10%);
+  --kazer-cyan: oklch(0.52 0.115 205);
+  --kazer-cyan-wash: oklch(0.52 0.115 205 / 10%);
+  --kazer-green: oklch(0.55 0.13 155);
+  --kazer-green-wash: oklch(0.55 0.13 155 / 10%);
+  --kazer-red: oklch(0.52 0.19 25);
+  --kazer-red-wash: oklch(0.52 0.19 25 / 10%);
+  --kazer-amber: oklch(0.6 0.13 65);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--kazer-line);
+  }
+
+  html {
+    background-color: var(--kazer-void);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--kazer-base);
+    color: var(--kazer-text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 24px;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: oklch(0.82 0.135 82 / 24%);
+    color: var(--kazer-text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--kazer-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(1 0 0 / 8%);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(1 0 0 / 16%);
+    background-clip: content-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@layer utilities {
+  .kazer-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(1 0 0 / 12%) transparent;
+  }
+
+  .kazer-gradient-text {
+    background: var(--kazer-metal);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .kazer-hairline {
+    border: 1px solid var(--kazer-line);
+  }
+
+  .kazer-mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  }
+
+  .kazer-reading {
+    max-width: 76ch;
+  }
+}
+
+/* ==========================================================================
+   Shimmer skeleton
+   ========================================================================== */
+
+@keyframes kazer-shimmer {
+  0% {
+    background-position: -180% 0;
+  }
+  100% {
+    background-position: 180% 0;
+  }
+}
+
+.kazer-skeleton {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    oklch(1 0 0 / 5%),
+    transparent
+  );
+  background-size: 180% 100%;
+  animation: kazer-shimmer 1.6s linear infinite;
+}
+
+/* ==========================================================================
+   Breathing indicator — "KAZER está pensando"
+   ========================================================================== */
+
+@keyframes kazer-breathe {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scaleX(0.72);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.kazer-breathe {
+  animation: kazer-breathe 1.5s var(--ease-base) infinite;
+  transform-origin: left center;
+}
+
+/* ==========================================================================
+   Mission Trace pulse
+   ========================================================================== */
+
+@keyframes kazer-trace-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+}
+
+.kazer-trace-pulse {
+  animation: kazer-trace-pulse 1.7s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .kazer-skeleton {
+    animation: none;
+    background-image: none;
+    background-color: var(--kazer-elevated);
+  }
+
+  .kazer-breathe,
+  .kazer-trace-pulse {
+    animation: none;
+    opacity: 0.8;
+  }
+}
