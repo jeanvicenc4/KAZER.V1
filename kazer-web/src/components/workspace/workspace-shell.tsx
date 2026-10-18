@@ -9,13 +9,14 @@ import { WorkspaceSidebar } from '@/components/workspace/sidebar';
 import { RightPanel, type PanelTab } from '@/components/workspace/right-panel';
 import { PaywallModal, PAYWALL_COPY } from '@/components/billing/paywall-modal';
 import { usePlan } from '@/hooks/use-kazer';
-import type {
-  Artifact,
-  Conversation,
-  Mode,
-  ModelId,
-  Source,
-  ToolRun,
+import {
+  TERMINAL_EXECUTION_TOOL,
+  type Artifact,
+  type Conversation,
+  type Mode,
+  type ModelId,
+  type Source,
+  type ToolRun,
 } from '@kazer/core';
 
 /**
@@ -33,6 +34,7 @@ export interface WorkspaceShellProps {
   sources?: Source[];
   artifacts?: Artifact[];
   toolRuns?: ToolRun[];
+  terminalReady?: boolean;
   activeCitation?: number | null;
   onCitationSelect?: (index: number) => void;
   onNewMission?: () => void;
@@ -53,6 +55,7 @@ export function WorkspaceShell({
   sources = [],
   artifacts = [],
   toolRuns = [],
+  terminalReady = false,
   activeCitation,
   onCitationSelect,
   onNewMission,
@@ -72,6 +75,9 @@ export function WorkspaceShell({
   const { plan, setDemoPlan } = usePlan();
   const router = useRouter();
   const pathname = usePathname();
+  const terminalRunCount = toolRuns.filter(
+    (run) => run.name === TERMINAL_EXECUTION_TOOL,
+  ).length;
 
   const openSheet = (tab: PanelTab) => {
     setPanelTab(tab);
@@ -177,7 +183,7 @@ export function WorkspaceShell({
             <PanelChip
               icon={Terminal}
               label="Execução"
-              count={toolRuns.length}
+              count={terminalRunCount}
               onClick={() => openSheet('execution')}
             />
           </div>
@@ -192,6 +198,7 @@ export function WorkspaceShell({
           sources={sources}
           artifacts={artifacts}
           toolRuns={toolRuns}
+          terminalReady={terminalReady}
           activeCitation={activeCitation}
           onCitationSelect={onCitationSelect}
           onToggleSave={onToggleSaveSource}
@@ -232,6 +239,7 @@ export function WorkspaceShell({
                 sources={sources}
                 artifacts={artifacts}
                 toolRuns={toolRuns}
+                terminalReady={terminalReady}
                 activeCitation={activeCitation}
                 onCitationSelect={onCitationSelect}
                 onToggleSave={onToggleSaveSource}

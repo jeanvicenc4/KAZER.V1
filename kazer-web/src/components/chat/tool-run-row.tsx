@@ -21,7 +21,7 @@ export function ToolRunRow({
   className?: string;
 }) {
   const [open, setOpen] = React.useState(defaultOpen);
-  const expandable = Boolean(run.output);
+  const expandable = Boolean(run.output || run.terminal);
 
   return (
     <div className={cn('rounded-md', className)}>
@@ -67,7 +67,7 @@ export function ToolRunRow({
       </button>
 
       <AnimatePresence initial={false}>
-        {open && run.output ? (
+        {open && (run.output || run.terminal) ? (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
@@ -75,12 +75,65 @@ export function ToolRunRow({
             transition={{ duration: 0.2, ease: [0.2, 0, 0, 1] }}
             className="overflow-hidden"
           >
-            <pre className="kazer-scroll mt-1 overflow-x-auto rounded-md border border-[var(--kazer-line)] bg-[var(--kazer-inset)] px-3 py-2 font-mono text-[12px] leading-[18px] text-[var(--kazer-text-2)]">
-              {run.output}
-            </pre>
+            {run.terminal ? (
+              <div className="mt-1 space-y-2 rounded-md border border-[var(--kazer-line)] bg-[var(--kazer-inset)] p-2.5">
+                <div>
+                  <p className="mb-1 text-[10px] uppercase tracking-[0.08em] text-[var(--kazer-text-3)]">
+                    Comando · {run.terminal.workingDirectory}
+                  </p>
+                  <pre className="kazer-scroll max-h-24 overflow-auto whitespace-pre-wrap break-all font-mono text-[12px] leading-[18px] text-[var(--kazer-gold-text)]">
+                    $ {run.terminal.command}
+                  </pre>
+                </div>
+                {run.terminal.stdout ? (
+                  <TerminalOutput label="Saída" value={run.terminal.stdout} />
+                ) : null}
+                {run.terminal.stderr ? (
+                  <TerminalOutput
+                    label="Erro padrão"
+                    value={run.terminal.stderr}
+                    error
+                  />
+                ) : null}
+                <p className="font-mono text-[11px] text-[var(--kazer-text-3)]">
+                  Código de saída: {run.terminal.exitCode ?? 'indisponível'}
+                  {' · '}Missão: {run.terminal.missionId}
+                </p>
+              </div>
+            ) : (
+              <pre className="kazer-scroll mt-1 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-md border border-[var(--kazer-line)] bg-[var(--kazer-inset)] px-3 py-2 font-mono text-[12px] leading-[18px] text-[var(--kazer-text-2)]">
+                {run.output}
+              </pre>
+            )}
           </motion.div>
         ) : null}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function TerminalOutput({
+  label,
+  value,
+  error = false,
+}: {
+  label: string;
+  value: string;
+  error?: boolean;
+}) {
+  return (
+    <div>
+      <p className="mb-1 text-[10px] uppercase tracking-[0.08em] text-[var(--kazer-text-3)]">
+        {label}
+      </p>
+      <pre
+        className={cn(
+          'kazer-scroll max-h-40 overflow-auto whitespace-pre-wrap break-words font-mono text-[12px] leading-[18px]',
+          error ? 'text-[var(--kazer-red)]' : 'text-[var(--kazer-text-2)]',
+        )}
+      >
+        {value}
+      </pre>
     </div>
   );
 }
@@ -95,12 +148,28 @@ function StatusIcon({ status }: { status: ToolRun['status'] }) {
       />
     );
   }
-  if (status === 'error') {
+  if (
+    status === 'error' ||
+    status === 'cancelled' ||
+    status === 'timeout' ||
+    status === 'unavailable' ||
+    status === 'denied'
+  ) {
+    const label =
+      status === 'cancelled'
+        ? 'Interrompido'
+        : status === 'timeout'
+          ? 'Tempo esgotado'
+          : status === 'unavailable'
+            ? 'Executor indisponível'
+            : status === 'denied'
+              ? 'Sem permissão'
+              : 'Falhou';
     return (
       <CircleX
         size={13}
         className="shrink-0 text-[var(--kazer-red)]"
-        aria-label="Falhou"
+        aria-label={label}
       />
     );
   }

@@ -16,18 +16,25 @@ const STATUS_GLYPH: Record<ToolRunStatus, string> = {
   running: '◐',
   done: '●',
   error: '✕',
+  cancelled: '✕',
+  timeout: '✕',
+  unavailable: '✕',
+  denied: '✕',
 };
 
 export function ToolRunRow({ run }: { run: ToolRun }): React.JSX.Element {
   const { colors } = useTheme();
   const [expanded, setExpanded] = useState(false);
+  const expandable = Boolean(run.output || run.terminal);
 
   const statusColor =
     run.status === 'done'
       ? colors.green
       : run.status === 'running'
         ? colors.cyan
-        : run.status === 'error'
+        : ['error', 'cancelled', 'timeout', 'unavailable', 'denied'].includes(
+            run.status,
+          )
           ? colors.red
           : colors.text3;
 
@@ -36,8 +43,18 @@ export function ToolRunRow({ run }: { run: ToolRun }): React.JSX.Element {
       ? (run.detail ?? 'executado')
       : run.status === 'running'
         ? 'executando…'
-        : run.status === 'error'
-          ? (run.output ?? 'falhou')
+        : ['error', 'cancelled', 'timeout', 'unavailable', 'denied'].includes(
+              run.status,
+            )
+          ? run.status === 'cancelled'
+            ? 'interrompido'
+            : run.status === 'timeout'
+              ? 'tempo esgotado'
+              : run.status === 'unavailable'
+                ? 'executor indisponível'
+                : run.status === 'denied'
+                  ? 'sem permissão'
+                  : (run.output ?? 'falhou')
           : 'aguardando';
 
   return (
@@ -46,7 +63,7 @@ export function ToolRunRow({ run }: { run: ToolRun }): React.JSX.Element {
         accessibilityRole="button"
         accessibilityLabel={`${run.name}. ${summary}. ${formatDuration(run.durationMs)}`}
         accessibilityState={{ expanded }}
-        onPress={() => setExpanded((current) => !current)}
+        onPress={() => expandable && setExpanded((current) => !current)}
         style={({ pressed }) => ({
           minHeight: 32,
           flexDirection: 'row',
@@ -95,7 +112,7 @@ export function ToolRunRow({ run }: { run: ToolRun }): React.JSX.Element {
           {formatDuration(run.durationMs)}
         </Text>
 
-        {run.output ? (
+        {expandable ? (
           <Feather
             name={expanded ? 'chevron-up' : 'chevron-down'}
             size={14}
@@ -104,7 +121,7 @@ export function ToolRunRow({ run }: { run: ToolRun }): React.JSX.Element {
         ) : null}
       </Pressable>
 
-      {expanded && run.output ? (
+      {expanded && expandable ? (
         <View
           style={{
             marginHorizontal: 8,
@@ -114,14 +131,49 @@ export function ToolRunRow({ run }: { run: ToolRun }): React.JSX.Element {
             backgroundColor: colors.inset,
             borderWidth: 1,
             borderColor: colors.line,
+            gap: 8,
           }}
         >
-          <Text
-            className="type-codeSm"
-            style={{ color: colors.text2, fontFamily: 'monospace' }}
-          >
-            {run.output}
-          </Text>
+          {run.terminal ? (
+            <>
+              <Text
+                className="type-codeSm"
+                style={{ color: colors.gold, fontFamily: 'monospace' }}
+              >
+                $ {run.terminal.command}
+              </Text>
+              {run.terminal.stdout ? (
+                <Text
+                  className="type-codeSm"
+                  style={{ color: colors.text2, fontFamily: 'monospace' }}
+                >
+                  {run.terminal.stdout}
+                </Text>
+              ) : null}
+              {run.terminal.stderr ? (
+                <Text
+                  className="type-codeSm"
+                  style={{ color: colors.red, fontFamily: 'monospace' }}
+                >
+                  {run.terminal.stderr}
+                </Text>
+              ) : null}
+              <Text
+                className="type-codeSm"
+                style={{ color: colors.text3, fontFamily: 'monospace' }}
+              >
+                Código de saída: {run.terminal.exitCode ?? 'indisponível'}
+                {' · '}Missão: {run.terminal.missionId}
+              </Text>
+            </>
+          ) : (
+            <Text
+              className="type-codeSm"
+              style={{ color: colors.text2, fontFamily: 'monospace' }}
+            >
+              {run.output}
+            </Text>
+          )}
         </View>
       ) : null}
     </View>

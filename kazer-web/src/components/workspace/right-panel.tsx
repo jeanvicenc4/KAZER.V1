@@ -13,7 +13,12 @@ import { cn } from '@/lib/utils';
 import { SourceCard } from '@/components/sources/source-card';
 import { ArtifactRow } from '@/components/artifacts/artifact-card';
 import { ToolRunRow } from '@/components/chat/tool-run-row';
-import type { Artifact, Source, ToolRun } from '@kazer/core';
+import {
+  TERMINAL_EXECUTION_TOOL,
+  type Artifact,
+  type Source,
+  type ToolRun,
+} from '@kazer/core';
 
 /**
  * RightPanel — three tabs: Fontes · Artefatos · Execução.
@@ -32,6 +37,7 @@ export function RightPanel({
   sources,
   artifacts,
   toolRuns,
+  terminalReady = false,
   activeCitation,
   onCitationSelect,
   onToggleSave,
@@ -43,6 +49,7 @@ export function RightPanel({
   sources: Source[];
   artifacts: Artifact[];
   toolRuns: ToolRun[];
+  terminalReady?: boolean;
   activeCitation?: number | null;
   onCitationSelect?: (index: number) => void;
   onToggleSave?: (source: Source) => void;
@@ -62,6 +69,10 @@ export function RightPanel({
         s.title.toLowerCase().includes(q) || s.domain.toLowerCase().includes(q),
     );
   }, [sources, query]);
+  const terminalRuns = React.useMemo(
+    () => toolRuns.filter((run) => run.name === TERMINAL_EXECUTION_TOOL),
+    [toolRuns],
+  );
 
   return (
     <aside
@@ -85,7 +96,7 @@ export function RightPanel({
               ? sources.length
               : t.id === 'artifacts'
                 ? artifacts.length
-                : toolRuns.length;
+                : terminalRuns.length;
 
           return (
             <button
@@ -162,7 +173,10 @@ export function RightPanel({
           ) : null}
 
           {tab === 'execution' ? (
-            <ExecutionTab toolRuns={toolRuns} />
+            <ExecutionTab
+              toolRuns={terminalRuns}
+              terminalReady={terminalReady}
+            />
           ) : null}
         </motion.div>
       </AnimatePresence>
@@ -292,13 +306,29 @@ function ArtifactsTab({
   );
 }
 
-function ExecutionTab({ toolRuns }: { toolRuns: ToolRun[] }) {
+function ExecutionTab({
+  toolRuns,
+  terminalReady,
+}: {
+  toolRuns: ToolRun[];
+  terminalReady: boolean;
+}) {
+  if (!terminalReady) {
+    return (
+      <EmptyPanel
+        icon={Terminal}
+        title="Terminal real indisponível"
+        description="A autenticação do servidor e o ambiente isolado ainda não estão configurados. Nenhum comando foi executado; a atividade demonstrativa do chat não aparece como execução real aqui."
+      />
+    );
+  }
+
   if (!toolRuns.length) {
     return (
       <EmptyPanel
         icon={Terminal}
-        title="Nenhuma execução registrada"
-        description="Cada ferramenta que o KAZER aciona aparece aqui, com status e duração."
+        title="Nenhuma execução nesta missão"
+        description="Quando o Brain executar um comando no ambiente isolado, o comando, a saída e o resultado confirmado aparecerão aqui."
       />
     );
   }

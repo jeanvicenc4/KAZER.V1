@@ -4,7 +4,7 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { MissionStep } from '@kazer/core';
+import type { MissionStep, ToolRunStatus } from '@kazer/core';
 
 /**
  * MissionTrace — the KAZER signature element.
@@ -154,7 +154,7 @@ export function stepsFromToolRuns(
     id: string;
     name: string;
     label: string;
-    status: 'pending' | 'running' | 'done' | 'error';
+    status: ToolRunStatus;
     detail?: string | null;
   }[],
 ): MissionStep[] {

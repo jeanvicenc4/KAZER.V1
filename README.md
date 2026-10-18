@@ -358,6 +358,7 @@ pagamentos e chamadas de IA reais estão fora do escopo desta etapa.
 | Supabase (Auth, RLS, Storage, Realtime) | ⏳ schema preparado, não conectado |
 | Stripe / RevenueCat | ⏳ UI pronta, integração pendente |
 | Chamadas reais de IA e busca | ⏳ pendente — via `kazer-core/src/adapters/` |
+| Terminal real do Brain | ⏳ contrato compartilhado preparado; autenticação e sandbox ainda não conectadas |
 
 **Todos os dados visíveis são de demonstração** e estão marcados como tal na
 interface. Conversas, fontes, artefatos, usuários e métricas são fictícios.
@@ -365,6 +366,28 @@ interface. Conversas, fontes, artefatos, usuários e métricas são fictícios.
 Para ligar o backend, implemente as interfaces de
 `kazer-core/src/adapters/types.ts` e registre a implementação real no lugar
 dos mocks — nenhum componente de UI precisa mudar.
+
+### Terminal do KAZER Brain — estado e fronteiras
+
+O contrato tipado de execução fica em `kazer-core/src/types/index.ts`. Ele
+transporta estado, conversa/missão, comando, diretório de trabalho, `stdout`,
+`stderr`, código de saída, tempos e capacidade de cancelamento, sem segredos.
+O painel Execução só conta e apresenta registros identificados como
+`terminal.exec`; as ferramentas demonstrativas do chat não são apresentadas
+como processos reais. Web e mobile compartilham o mesmo formato.
+
+**A execução permanece desativada.** Este repositório não tem autenticação de
+servidor, chamadas reais de IA nem um sandbox conectado. Não existe endpoint
+que execute comandos. Não habilite execução de processos dentro do servidor
+Next.js. Antes de ativar a ferramenta, integre uma sessão validável no servidor,
+resolva as permissões da Skill no backend e conecte um executor isolado com
+limites de duração/saída, isolamento por workspace, cancelamento e limpeza.
+O Brain só deve registrar sucesso após receber a confirmação do executor. A
+interface mostra explicitamente quando essa configuração está ausente.
+
+Nenhuma chave do provedor deve ser enviada ao navegador ou ao modelo. Operações
+privilegiadas, rede externa e publicação/implantação exigem política própria e
+não são autorizadas pela permissão `shell.exec` por si só.
 
 ---
 

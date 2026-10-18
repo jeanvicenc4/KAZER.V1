@@ -95,7 +95,27 @@ export interface Source {
   relevance: number;
 }
 
-export type ToolRunStatus = 'pending' | 'running' | 'done' | 'error';
+export type ToolRunStatus =
+  | 'pending'
+  | 'running'
+  | 'done'
+  | 'error'
+  | 'cancelled'
+  | 'timeout'
+  | 'unavailable'
+  | 'denied';
+
+/** Real process metadata. Mock/demo tool runs must not populate these fields. */
+export interface TerminalExecutionDetails {
+  command: string;
+  workingDirectory: string;
+  missionId: string;
+  stdout: string;
+  stderr: string;
+  exitCode: number | null;
+  startedAt: string | null;
+  finishedAt: string | null;
+}
 
 export interface ToolRun {
   id: string;
@@ -106,7 +126,125 @@ export interface ToolRun {
   durationMs: number | null;
   output: string | null;
   detail?: string | null;
+  /** Present only when a server-side isolated executor confirms the run. */
+  terminal?: TerminalExecutionDetails;
 }
+
+export type TerminalExecutorState =
+  | 'waiting'
+  | 'running'
+  | 'completed'
+  | 'interrupted'
+  | 'error'
+  | 'timeout'
+  | 'denied'
+  | 'unavailable';
+
+/** Shared contract for real isolated-executor records; contains no credentials. */
+export interface TerminalExecution {
+  id: string;
+  conversationId: string;
+  missionId: string;
+  state: TerminalExecutorState;
+  command: string;
+  workingDirectory: string;
+  stdout: string;
+  stderr: string;
+  exitCode: number | null;
+  createdAt: string;
+  startedAt: string | null;
+  finishedAt: string | null;
+  durationMs: number | null;
+  canCancel: boolean;
+  error: string | null;
+}
+
+export interface TerminalExecutorLimits {
+  timeoutMs: number;
+  maxOutputBytes: number;
+  maxConcurrentProcesses: number;
+}
+
+/**
+ * A server-only executor must honor the passed resource limits, keep command
+ * execution out of the Next.js host, and reject unsupported operations.
+ */
+export interface TerminalExecutor {
+  execute(input: {
+    executionId: string;
+    conversationId: string;
+    missionId: string;
+    workspaceId: string;
+    workingDirectory: string;
+    command: string;
+    timeoutMs: number;
+    maxOutputBytes: number;
+  }, signal?: AbortSignal): Promise<TerminalExecution>;
+  cancel(input: {
+    executionId: string;
+    workspaceId: string;
+  }): Promise<boolean>;
+}
+
+export interface TerminalPermissionContext {
+  authenticatedUserId: string;
+  workspaceId: string;
+  conversationId: string;
+  skillPermissions: SkillPermission[];
+  authorizedByServer: true;
+}
+
+/**
+ * Check a context assembled by the server from the authenticated session and
+ * server-loaded Skill permissions. This helper is not client authentication.
+ */
+export function canInvokeTerminal(
+  context: TerminalPermissionContext | null | undefined,
+): context is TerminalPermissionContext {
+  return Boolean(
+    context?.authorizedByServer === true &&
+      context.authenticatedUserId &&
+      context.workspaceId &&
+      context.conversationId &&
+      context.skillPermissions.includes('shell.exec'),
+  );
+}
+
+/**
+ * Lexical path boundary check only. The isolated filesystem must also prevent
+ * symlink escapes; this must never be used to sandbox a host process.
+ */
+export function isWorkspacePath(candidate: string, root: string): boolean {
+  const normalize = (path: string) => {
+    const parts: string[] = [];
+    for (const part of path.replaceAll('\\', '/').split('/')) {
+      if (!part || part === '.') continue;
+      if (part === '..') {
+        if (!parts.length) return null;
+        parts.pop();
+      } else {
+        parts.push(part);
+      }
+    }
+    return parts.join('/');
+  };
+
+  const normalizedRoot = normalize(root);
+  const normalizedCandidate = normalize(candidate);
+  return Boolean(
+    normalizedRoot &&
+      normalizedCandidate &&
+      (normalizedCandidate === normalizedRoot ||
+        normalizedCandidate.startsWith(`${normalizedRoot}/`)),
+  );
+}
+
+export const TERMINAL_EXECUTION_TOOL = 'terminal.exec';
+export const TERMINAL_EXECUTION_LIMITS: TerminalExecutorLimits = {
+  timeoutMs: 30_000,
+  maxOutputBytes: 64 * 1024,
+  maxConcurrentProcesses: 1,
+};
 
 export type ArtifactType =
   | 'document'
